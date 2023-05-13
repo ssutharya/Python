@@ -1,0 +1,67 @@
+'''Read the file 'iris.json' as a text file
+1. create a list having each line of the file as an element.
+2. convert it into a list of dictionary objects.
+3. show the details of all flowers whose species is "setosa".
+4. print the minimum petal area and max sepal area in each species.
+5. sort the list of dictionaries according to the total area are(?) sepal and petal.'''
+
+import json
+def list1(filepath):
+  file = open(filepath,'r')
+  jsonList = file.readlines()
+  file.close()
+  return jsonList
+def list_of_dict(filepath):
+  file = open(filepath,'r')
+  jsonData = json.load(file)
+  file.close()
+  return jsonData
+def Setosa(jsonList):
+  print("\nDetails of flowers of species Setosa: ")
+  for i in jsonList:
+    if(i['species'] == 'setosa'):
+      print(i)
+def area(jsonList):
+  species_names = list()
+  for i in jsonList:        
+    species_names.append(i['species'])
+  species_names = list(set(species_names))
+  sepalArea = list()
+  petalArea = list()
+  for i in species_names:
+    for j in jsonList:
+      if(j['species'] == i):
+        sepalArea.append(j['sepalLength'] * j['sepalWidth'])
+        petalArea.append(j['petalLength'] * j['petalWidth'])
+    print()
+    print(i.capitalize())
+    print("Maximum Sepal Area in ",i.capitalize()," is ",end="")
+    print(round(max(sepalArea),2))
+    print("Minimum Petal Area in ",i.capitalize()," is ",end="")
+    print(round(min(petalArea),2))
+    sepalArea.clear()
+    petalArea.clear()
+def total_area(jsonList):
+  for i in jsonList:
+    petal = i['petalLength'] * i['petalWidth']
+    sepal = i['sepalLength'] * i['sepalWidth']
+    total = (petal) + (sepal)   
+    i.update({'total_area':round(total_area,2)})
+  sorted_list = sorted(jsonList,key=lambda i:i['total_area'])
+  print("\nList sorted on the basis of total area")
+  for i in sorted_list:
+    print(i)
+filePath = 'C:\\Users\\zetar\\Downloads\\iris.json' 
+jsonList = list1(filePath)
+print("List with each line as element\n")
+for line in jsonList:
+  print(line)
+jsonData = list_of_dict(filePath)
+print("\nList of Dictionaries")
+for i in jsonData:
+  for key, values in i.items():
+    print(key.capitalize()+" : ",values,end=" , ")
+  print()
+Setosa(jsonData)
+area(jsonData)
+total_area(jsonData)
