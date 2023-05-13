@@ -1,0 +1,36 @@
+'''Read a string having numbers separated by spaces into a list of integers.
+1. rotate list by k position to the right
+2. convert list into a tuple
+3. remove duplicates from tuple and back to list
+4. create another list, put result of fn f(x)= x2 - x with each element
+5. sort both lists individually, merge them into a sorted list.'''
+
+string0=input("Enter space-separated numbers: ")
+list0=list(string0.split(" "))
+list1=[]
+for i in list0:
+  list1.append(int(i))
+print(list1)
+
+n=int(input("Enter the value for right rotation: "))
+list2=(list1[len(list1)-n:len(list1)] + list1[0:len(list1)-n])
+print("List after rotation: ",list2)
+
+tuple0=tuple(list2)
+print("The list as a tuple is: ",tuple0)
+
+tuple0=tuple(set(tuple0))
+print("Tuple after removing duplicates: ",tuple0)
+list3=list(tuple0)
+print("The tuple as a list again is: ",list3)
+
+list4=[]
+for i in list3:
+  list4.append(i*i-i)
+print("New list is: ",list4)
+
+list3.sort()
+list4.sort()
+slist=list3+list4
+slist.sort()
+print("The merged list is: ",slist)
