@@ -1,0 +1,45 @@
+'''1. Develop a program to read a 4 digit number and find its
+a. sum of digits
+b. reverse
+c. diff btwn the product of digits at odd position and product of digits at even position'''
+
+number=int(input("Enter a 4 digit number: "))
+num=number
+
+count=0
+while num>0:
+  count+=1
+  num//=10
+if count==4:
+  def Sum(n):
+    sum=0
+    while n>0:
+      sum+=n%10
+      n//=10
+    return sum
+
+  def reverse(n):
+    reverse = 0
+    while n != 0:
+      remainder = n % 10
+      reverse = reverse * 10 + remainder
+      n //= 10
+    return reverse
+
+  def diff(n):
+    l=list(str(n))
+    list_n = []
+    for i in l:
+      list_n.append(int(i))
+    first = list_n[0] * list_n[2]
+    second = list_n[1] * list_n[3]
+    difference = first - second
+    return difference
+
+  print("The sum is: ",Sum(number))
+  print("The reverse is: ",reverse(number))
+  print("The difference between products of digits at odd & even positions is: ",diff(number))
+
+
+else:
+  print("Number given is not a 4 digit number.")
