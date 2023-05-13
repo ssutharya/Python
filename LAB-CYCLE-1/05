@@ -1,0 +1,79 @@
+#read a string, print all substrings, print all substrings of len k & with n distinct char..
+
+
+def sub_string(string):
+  sub = []
+  for i in range(len(string)):
+    for j in range(i,len(string)):
+      sub.append(string[i:j+1])
+  return sub
+
+
+def sub_len_k(string,k):
+  sub = []
+  for i in sub_string(string):
+    if len(i) == k:
+      sub.append(i)
+  return sub
+
+def substrings_of_length_k_n_distinct(string, k, n):
+    if k > len(string) or n > len(string) or n > k:
+        return []
+    sub = sub_len_k(string,k)
+    distinct = []
+    for i in sub:
+        if len(set(i)) == n:
+            distinct.append(i)
+    return distinct
+
+
+def  max_len_n_distinct(string,n):
+  sub = []
+  for i in range(0,len(string)+1):
+    for j in range(i+1,len(string)+1):
+      s = string[i:j]
+      distinct = set(s)
+      if len(distinct) == n:
+        sub.append(s)
+  max_length = len(max(sub,key = len))
+  return [i for i in sub if len(i) == max_length]
+
+def palindrome(string):
+  sub = []
+  for i in range(len(string)):
+        for j in range(i, len(string)):
+            if string[i:j+1] == string[i:j+1][::-1]:
+                sub.append(string[i:j+1])
+  sub = list(set(sub))
+  return sorted(sub)
+  
+string = (input("Enter string: "))
+
+while True:
+  print("1. Print all possible strings \n2. Print all possible substrings of length K \n3. Print all possible substrings of length K with N distinct characters \n4. Print substring(s)of length maximum length with N distinct characters \n5. Print all palindrome substrings \n6. Exit")
+
+  ch = int(input("Enter choice: "))
+  
+  if ch == 1:
+    print("All possible substrings are: ",sub_string(string))
+  elif ch == 2:
+    k = int(input("Enter the length of substring needed: "))
+    result = sub_len_k(string,k)
+    print("All possible substrings of length K are: ",result)
+  elif ch == 3:
+     k = int(input("Enter length of substring: "))
+     n = int(input("Enter number of distinct characters: "))
+     result = substrings_of_length_k_n_distinct(string, k, n)
+     print("All possible substrings of length ",k," with",n," distinct characters are : ",result)
+  elif ch == 4:
+     n = int(input("Enter number of distinct characters: "))
+     result = max_len_n_distinct(string, n)
+     print("Substring(s) of length maximum length with ",n," distinct characters are : ",result)
+  elif ch == 5:
+    result = palindrome(string)
+    print("Palindromes are : ",result)
+  elif ch == 6:
+    print("Thank you")
+    break
+  else:
+    print("Invalid choice..")
