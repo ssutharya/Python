@@ -1,0 +1,54 @@
+'''Suppose a newly born pair of rabbits, one male and one female, are put in a field.
+Rabbits can mate at the age of one month so that at the end of its second month, a female has produced another pair of rabbits.
+Suppose that our rabbits never die and that the female always produces one new pair every month from the second month.
+Develop a program to show a table containing the number of pairs of rabbits in the first N months.'''
+
+def calculate(month):            
+   n1=1 
+   n2=1
+   
+   if month == 1:
+     display(1,n1)
+     return n1
+   elif month == 2:
+     display(1,n1)
+     display(2,n2)
+     return n2
+   
+   else:
+    if month != 0:
+     display(1,n1)
+     display(2,n2)
+     
+     for i in range(3,month + 1):
+       n3 = n1 + n2
+       display(i,n3)
+       n1 = n2
+       n2 = n3
+     return n3
+    
+    else:
+      print("\nThere is no pair of rabbits in the field\n")
+      return 0;
+
+def display(j,n3):         
+   print("_" * 50)
+   print ("\t",j,"\t|\t",n3)
+
+def main():                 
+   month=int(input("Enter the months: "))       
+  
+   print("\n")
+   print("-" * 50)
+   print("\tTABLE OF RABBIT PAIRS")
+   print("-" * 50)
+   print("\tMonth \t| Number of pair of Rabbits")
+   
+   n=calculate(month)
+   
+   print("-" * 50)
+   print("\nTotal number of Rabbit Pairs at the end of", end = "")
+   print(month," months is: ",n,"\n")
+
+main()
+
