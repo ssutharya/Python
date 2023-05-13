@@ -1,0 +1,52 @@
+#check if number is happy or not, print all happy numbers within a range, print first n happy numbers.
+
+n = int(input("Enter a number to check: "))
+num = n
+
+def happy(n):
+  sum = 0
+  while n != 0:
+    rem = n % 10
+    sum = sum + (rem * rem)
+    n //= 10
+  return sum
+
+while n != 1 and n != 4:
+  n = happy(n)
+
+if n == 1:
+  print(num,"is a happy number ")
+elif n == 4:
+  print(num,"is a sad number ")
+
+
+def happy_in_range():
+  lo = int(input("Enter lower limit: "))
+  u = int(input("Enter upper limit: "))
+  l = []
+  print("The happy numbers between",lo,"and",u,"is: ")
+  for i in range (lo,u + 1):
+    sum = 0
+    n = i
+    while sum != 1 and sum != 4:
+      sum = 0
+      while n != 0:
+        rem = n % 10
+        sum = sum + (rem * rem)
+        n //= 10
+      n = sum
+      if sum == 1:
+        print(i,end=' ')
+happy_in_range()
+
+h = int(input("\n Enter the number of happy numbers to be printed: "))
+def first_n_happy(n):
+  count = 0
+  l = []
+  while n != 1 :
+      n = sum(int(i)**2 for i in str(n))
+      if n in l:
+        return False
+      l.append(n)
+  return True
+print([x for x in range(500) if first_n_happy(x)][:h])
