@@ -1,0 +1,42 @@
+#3. read employee name,code, basic pay; calculate gross salary,deduction, net salary. payslip.
+
+
+name = input("Enter Employee's name: ")
+code = int(input("Enter Employee code: "))
+basic = int(input("Enter basic pay: "))
+
+def gross_salary():
+  global gross
+  if basic < 10000:
+    gross = basic + (0.05 * basic) + (0.025 * basic) + 500
+  elif 10000 < basic < 30000:
+    gross = basic + (0.075 * basic) + (0.05 * basic) + 2500
+  elif 30000 < basic < 50000:
+    gross = basic + (0.11 * basic) + (0.075 * basic) + 5000
+  else:
+    gross = basic + (0.25 * basic) + (0.11 * basic) + 7000
+  print("Gross salary is: ",gross)
+gross_salary()
+
+def deduction():
+  global d
+  if basic < 10000:
+    d = 20 + (0.08 * basic)
+  elif 10000 < basic < 30000:
+    d = 60 + (0.08 * basic)
+  elif 30000 < basic < 50000:
+    d = 60 + (0.11 * basic) + (0.11 * basic)
+  else:
+    d = 80 + (0.12 * basic) + (0.20 * basic)
+  print("The deduction is: ",d)
+deduction()
+
+def net_salary():
+  global net
+  net = gross - d
+  print("The net salary is: ",net)
+net_salary()
+
+def payslip():
+  print("\n","Name: ",name,"\n","Code: ",code,"\n","Basic Pay: ",basic,"\n","Gross Salary: ",gross,"\n","Deduction: ",d,"\n","Net Salary: ",net)
+payslip()
